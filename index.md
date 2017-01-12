@@ -59,7 +59,16 @@
 ## Причини за създаване
 <a name="rationale"></a>
 
-При положение, че вече съществуват технологии като `asm.js`, както и имплементации на POSIX нишки (*pthreads*) и SIMD инструкции във Firefox и Chromium.
+При положение, че вече съществуват технологии като `asm.js`<sup>[[LASTNUMBER]](#ref-wp-asmjs)</sup>, както и имплементации на POSIX нишки (*pthreads*)<sup>[[NUMBER]](#ref-paralleljs)</sup><sup>[[NUMBER]](#ref-blinkdev-shbuf)</sup> и SIMD инструкции<sup>[[NUMBER]](#ref-simdjs)</sup><sup>[[NUMBER]](#ref-blinkdev-simdjs)</sup> във Firefox и Chromium, на пръв поглед разработването на *WebAssembly* изглежда лишено от смисъл.
+
+Разбира се, на практика нещата са доста по-различни.  *WebAssembly* има две основни предимства, които гореспоменатите технологии не предоставят:
+1. Бинарният формат, използван в *WebAssembly*, може да се декодира много по-бързо, отколкото JavaScript може се парсва (експерименталните данни показват над 20-кратно ускорение).  На мобилните платформи големи кодови бази могат да отнемат от 20 до 40 секунди *само* за парсване (дори и да са минифицирани), така че *native* декодирането (особено когато е комбинирано с други техники като stream-ове<sup>[[NUMBER]](#ref-streams-api)</sup> за постигане на по-добра компресия от *gzip*) е ключово за постигането на добър UX при студен старт.
+2. Чрез избягването на ограничението за задължителна *ahead-of-time* компилация<sup>[[NUMBER]](#ref-asmjs-aot)</sup> и постигането на добра производителност дори при енджини без специфични `asm.js` оптимизации<sup>[[NUMBER]](#ref-asmjs-opts)</sup> може [имплементацията да се разшири](#future-features) по подходящ начин, така че се достигат *native* нива на производителност.
+
+Естествено, всеки нов стандарт създава затруднения (трябва да се поддържа и обновява; може да бъде потенциална цел за хакерски атаки; размерът на кода трябва да се придържа в разумни граници), които могат евентуално да засенчат предимствата му.  *WebAssembly* се старае да направи затрудненията минимални, използвайки дизайн, който позволява на (но не задължава) всеки един браузър да го имплементира *вътре* в собствения си JavaScript енджин, преизползвайки по този начин вече съществуващия компилиращ бекенд на енджина, както и фронтенда за зареждане на *ECMAScript* 6 (ES6) модули, механизмите за изолация (*sandboxing*) на програмите и други допълнителни компоненти на виртуалната машина.  Затова от гледна точка на трудност и цена на имплементация *WebAssembly* трябва да се разглежда по-скоро като голям нов *feature* на JavaScript, отколкото като фундаментално разширение на модела на браузъра.
+
+Ако сравняваме *WebAssembly* и `asm.js`, даже и при енджините, при които `asm.js` вече е оптимизиран, предимствата надхвърлят недостатъците и рисковете.
+
 
 ## Семантика на изпълнението на байткода
 <a name="semantics"></a>
@@ -96,3 +105,10 @@ NUMBER. <a name="ref-wp-sandbox"></a>Wikipedia, *Sandbox*, https://en.wikipedia.
 NUMBER. <a name="ref-wp-same-origin"></a>Wikipedia, *Same-origin policy*, https://en.wikipedia.org/wiki/Same-origin_policy, последно посетен на 2017-01-12.
 NUMBER. <a name="ref-wp-mvp"></a>Wikipedia, *Minimum viable product*, https://en.wikipedia.org/wiki/Minimum_viable_product, последно посетен на 2017-01-12.
 NUMBER. <a name="ref-wp-asmjs"></a>Wikipedia, *`asm.js`*, https://en.wikipedia.org/wiki/Asm.js, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-paralleljs"></a>Mozilla JavaScript Blog, *The Path to Parallel JavaScript*, https://blog.mozilla.org/javascript/2015/02/26/the-path-to-parallel-javascript/, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-blinkdev-shbuf"></a>*blink-dev* forum of the `chromium.org` Google Group, *Intent to Implement: Shared Array Buffers*, https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/d-0ibJwCS24, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-simdjs"></a>Mozilla Hacks - the Web developer blog, *Introducing SIMD.js*, https://hacks.mozilla.org/2014/10/introducing-simd-js/, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-blinkdev-simdjs"></a>*blink-dev* forum of the `chromium.org` Google Group, *Intent to Implement: SIMD.js*, https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/2PIOEJG_aYY, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-streams-api"></a>*W3C* Working Group Note, *Streams API*, https://www.w3.org/TR/streams-api/, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-asmjs-aot"></a>Luke Wagner's blog, *asm.js AOT compilation and startup performance*, https://blog.mozilla.org/luke/2014/01/14/asm-js-aot-compilation-and-startup-performance/, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-asmjs-opts"></a>Luke Wagner's blog, *Microsoft announces `asm.js` optimizations*, https://blog.mozilla.org/luke/2015/02/18/microsoft-announces-asm-js-optimizations/#asmjs-opts, последно посетен на 2017-01-12.
