@@ -1,40 +1,47 @@
 # WebAssembly
 
 ## Въведение
+<a name="intro"></a>
 
-***WebAssembly***, или *wasm*, е платформа (включваща в себе си *виртуална машина*) за компилация и изпълнение на клиентски (т.е. браузър-базирани) уеб приложения.<sup>[[1]](#website-wasm)</sup>
+***WebAssembly***, или *wasm*, е платформа (включваща в себе си *виртуална машина*) за компилация и изпълнение на клиентски (т.е. браузър-базирани) уеб приложения.<sup>[[NUMBER]](#ref-website-wasm)</sup>
 
 
 ## Предимства
+<a name="features"></a>
 
 *WebAssembly* има следните основни предимства:
 * преносима е (изпълнява се на множество различни хардуерни платформи, операционни системи, браузъри и т.н.);
 * оптимизирана е откъм размер на генерираните изпълними файлове и откъм тяхното време на зареждане и изпълнение;
-* отворен стандарт е на *W3C* общността, която включва представители на всички най-използвани браузъри.<sup>[[2]](#website-wasm-cg)</sup>
+* отворен стандарт е на *W3C* общността, която включва представители на всички най-използвани браузъри.<sup>[[NUMBER]](#ref-website-wasm-cg)</sup>
 
 ### *WebAssembly* е ефективна и бърза
+<a name="features-fast"></a>
 
-Платформата *WebAssembly* е базирана на *стекова виртуална машина*<sup>[[3]](#wp-stack-machine)</sup>.  Нейният байткод използва бинарен формат за изпълними файлове, който е оптимизиран откъм размер и време за изпълнение.
+Платформата *WebAssembly* е базирана на *стекова виртуална машина*<sup>[[NUMBER]](#ref-wp-stack-machine)</sup>.  Нейният байткод използва бинарен формат за изпълними файлове, който е оптимизиран откъм размер и време за изпълнение.
 *WebAssembly* се стреми да постигне скорост на изпълнение, сходна с тази на софтуера, изпълняван директно (*native*) върху реалния хардуер на машината.  За да постигне тази цел по ефективен начин, тя се възползва от множеството способности за оптимизация, вградени в хардуера на многото поддържани от нея платформи.
 
 ### *WebAssembly* е безопасна
+<a name="features-safe"></a>
 
-*WebAssembly* включва в себе си изолирана среда за изпълнение (*sandboxed execution environment*<sup>[[4]](#wp-sandbox)</sup>), която гарантира безопасността на достъпа до паметта.  При вграждане в уеб страници *WebAssembly* гарантира следването на *same-origin*<sup>[[5]](#wp-same-origin)</sup> правилото и политиките за сигурност на браузъра, в който се изпълнява.
+*WebAssembly* включва в себе си изолирана среда за изпълнение (*sandboxed execution environment*<sup>[[NUMBER]](#ref-wp-sandbox)</sup>), която гарантира безопасността на достъпа до паметта.  При вграждане в уеб страници *WebAssembly* гарантира следването на *same-origin*<sup>[[NUMBER]](#ref-wp-same-origin)</sup> правилото и политиките за сигурност на браузъра, в който се изпълнява.
 
 ### *WebAssembly* е отворена и подходяща за дебъгване
+<a name="features-open"></a>
 
 *WebAssembly* е направена да може да се извежда (*pretty-print*) в текстов формат за по-лесно дебъгване, тестване, експериментиране, оптимизиране, научаване, обучение и писане на програми на ръка.  Този формат се използва при показването на изходния код на *wasm* модули в уеб браузъра.
 
 ### *WebAssembly* е част от общата уеб платформа
+<a name="features-web"></a>
 
 *WebAssembly* е създадена със съображението, че в уеб пространството няма версии, но за сметка на това има обратна съвместимост.  *WebAssembly* модулите могат да достъпват функционалността на браузъра през същите програмни интерфейси, които са достъпни и през JavaScript.  Освен всичко това *WebAssembly* поддържа вграждане в софтуер, който не е предназначен за уеб.
 
 
 ## Цели на проекта *WebAssembly*
+<a name="goals"></a>
 
 * Да дефинира бинарен формат за изпълними файлове, който е оптимизиран откъм размер и време за изпълнение.  Програмите, компилирани до него, трябва да достигат скорост на изпълнение, сходна с тази на софтуера, изпълняван директно върху реалния хардуер на машината.
 * Да специфицира и да имплементира един по един следните стадии на развитие:
-  * *минимален работещ продукт* (*minimum viable product*<sup>[[6]](#wp-mvp)</sup>) с функционалност, сходна с тази на оптимизирания вариант на JavaScript `asm.js`<sup>[[7]](#wp-asmjs)</sup>, която да таргетира основно езиците C и C++;
+  * *минимален работещ продукт* (*minimum viable product*<sup>[[NUMBER]](#ref-wp-mvp)</sup>) с функционалност, сходна с тази на оптимизирания вариант на JavaScript `asm.js`<sup>[[NUMBER]](#ref-wp-asmjs)</sup>, която да таргетира основно езиците C и C++;
   * продукт с допълнителни характеристики, първоначално фокусирани върху ключови свойства за една виртуална машина, като например поддръжка за нишки, *zero-cost* изключения и SIMD инструкции, както и поддръжка за езици, различни от C и C++.
 * Да може да се изпълнява в рамките на и да се интегрира с вече съществуващата уеб платформа:
   * да се съобразява с липсата на версии и силно изявената обратна съвместимост, утвърдили се като *де факто* стандарт при постепенното развитие на уеб технологиите;
@@ -49,13 +56,39 @@
   * допълнителни компилатори и придружаващи ги инструменти, таргетиращи *WebAssembly*;
   * други полезни инструменти за *WebAssembly*.
 
+## Причини за създаване
+<a name="rationale"></a>
+
+При положение, че вече съществуват технологии като `asm.js`, както и имплементации на POSIX нишки (*pthreads*) и SIMD инструкции във Firefox и Chromium.
+
+## Семантика на изпълнението на байткода
+<a name="semantics"></a>
+
+## Бинарен формат на изпълнимите файлове
+<a name="binary-encoding"></a>
+
+## Редактируем текстов формат
+<a name="text-format"></a>
+
+## Преносимост
+<a name="portability"></a>
+
+## Сигурност
+<a name="security"></a>
+
+## Съвместимост с уеб
+<a name="web"></a>
+
+## Приложения извън уеб
+<a name="non-web"></a>
 
 ## Източници
+<a name="ref"></a>
 
-1. <a name="website-wasm"></a>Уебсайт на *WebAssembly*, http://webassembly.org/, последно посетен на 2017-01-12.
-2. <a name="website-wasm-cg"></a>Уебсайт на *WebAssembly Community Group*, https://www.w3.org/community/webassembly/, последно посетен на 2017-01-12.
-3. <a name="wp-stack-machine"></a>Wikipedia, *Stack machine*, https://en.wikipedia.org/wiki/Stack_machine, последно посетен на 2017-01-12.
-4. <a name="wp-sandbox"></a>Wikipedia, *Sandbox*, https://en.wikipedia.org/wiki/Sandbox_(computer_security), последно посетен на 2017-01-12.
-5. <a name="wp-same-origin"></a>Wikipedia, *Same-origin policy*, https://en.wikipedia.org/wiki/Same-origin_policy, последно посетен на 2017-01-12.
-6. <a name="wp-mvp"></a>Wikipedia, *Minimum viable product*, https://en.wikipedia.org/wiki/Minimum_viable_product, последно посетен на 2017-01-12.
-7. <a name="wp-asmjs"></a>Wikipedia, *`asm.js`*, https://en.wikipedia.org/wiki/Asm.js, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-website-wasm"></a>Уебсайт на *WebAssembly*, http://webassembly.org/, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-website-wasm-cg"></a>Уебсайт на *WebAssembly Community Group*, https://www.w3.org/community/webassembly/, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-wp-stack-machine"></a>Wikipedia, *Stack machine*, https://en.wikipedia.org/wiki/Stack_machine, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-wp-sandbox"></a>Wikipedia, *Sandbox*, https://en.wikipedia.org/wiki/Sandbox_(computer_security), последно посетен на 2017-01-12.
+NUMBER. <a name="ref-wp-same-origin"></a>Wikipedia, *Same-origin policy*, https://en.wikipedia.org/wiki/Same-origin_policy, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-wp-mvp"></a>Wikipedia, *Minimum viable product*, https://en.wikipedia.org/wiki/Minimum_viable_product, последно посетен на 2017-01-12.
+NUMBER. <a name="ref-wp-asmjs"></a>Wikipedia, *`asm.js`*, https://en.wikipedia.org/wiki/Asm.js, последно посетен на 2017-01-12.
