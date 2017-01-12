@@ -91,6 +91,9 @@
 ## Употреба извън уеб
 <a name="non-web"></a>
 
+## Приложения
+<a name="use-cases"></a>
+
 ## Какво предстои
 <a name="future-features"></a>
 
