@@ -83,6 +83,9 @@
 ## Приложения извън уеб
 <a name="non-web"></a>
 
+## Какво предстои
+<a name="future-features"></a>
+
 ## Източници
 <a name="ref"></a>
 
